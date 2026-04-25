@@ -2,6 +2,8 @@
 
 - patch `logVimModeChange` to keep same cursor position on exiting insert mode
 
+You can install this fork by placing into `.obsidian/plugins` in the Vault directory.
+
 # Obsidian Vimrc Support Plugin
 
 > [!IMPORTANT]
