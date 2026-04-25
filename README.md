@@ -1,3 +1,7 @@
+# Fork changes
+
+- patch `logVimModeChange` to keep same cursor position on exiting insert mode
+
 # Obsidian Vimrc Support Plugin
 
 > [!IMPORTANT]

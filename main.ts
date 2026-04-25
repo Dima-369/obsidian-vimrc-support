@@ -248,7 +248,18 @@ export default class VimrcPlugin extends Plugin {
 
 	logVimModeChange = async (cm: any) => {
 		if (!cm) return;
+		const wasInsert = this.isInsertMode;
 		this.isInsertMode = cm.mode === 'insert';
+		if (wasInsert && cm.mode === 'normal') {
+			// Prevent Vim's default cursor-left on Esc by moving right by one.
+			const view = this.getActiveView();
+			const editor = view?.editor;
+			if (editor) {
+				const pos = editor.getCursor();
+				const lineLen = editor.getLine(pos.line).length;
+				if (pos.ch < lineLen) editor.setCursor({ line: pos.line, ch: pos.ch + 1 });
+			}
+		}
 		switch (cm.mode) {
 			case "insert":
 				this.currentVimStatus = vimStatus.insert;
